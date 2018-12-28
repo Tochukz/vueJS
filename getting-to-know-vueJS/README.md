@@ -1,0 +1,1 @@
+Based on the book: Getting to Know Vue.js by Brett Nelson
