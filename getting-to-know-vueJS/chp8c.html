@@ -1,0 +1,63 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Component Events</title>
+</head>
+<body>
+    <div id="app">
+        <search-box v-on:input="doSomething"></search-box>
+        <ship-list-item 
+            v-for="ship in ships" 
+            v-bind:key="ship.url" 
+            v-bind:ship="ship" 
+            v-on:ship-selected="viewShip" />
+    </div>
+    
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"> </script>
+<script>
+/** Component will emit an input event when te Enter or Escape key is pressed. */
+Vue.component('search-box', {
+    template: `
+        <div>
+           <label>Search:</label>
+           <input type="text" v-on:keyup.enter.esc="$emit('input', $event.target.value)" />
+        </div>
+    `
+});
+
+Vue.component('ship-list-item', {
+    props: {
+        ship: {
+            type: Object
+        }
+    }, 
+    template: `
+        <li>
+            {{ship.name}} <button v-on:click="$emit('ship-selected', ship.url)">view </button>
+        </li>
+    `
+})
+new Vue({
+    el: '#app',
+    data: {
+        ships: [
+            {name: 'ELdoradoh', url: 'Eldoradoship.com'},
+            {name: 'Ekimma', url: "EkimmaCruse.them"},
+            {name: 'Navadeah Crusah', url: 'Navedaluxury.org'}
+        ]
+    },
+    methods: {
+        doSomething(value) {
+            console.info(value)
+        },
+        viewShip(value) {
+            console.info(`Ship name: ${value}`);
+        }
+    }
+})
+
+</script>
+</body>
+</html>
