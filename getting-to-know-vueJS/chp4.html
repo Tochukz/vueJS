@@ -82,12 +82,17 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"> </script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script> 
+/**Computed properties.
+Computed properties work similar to methods in Vue. The main difference is that
+the results are stored for later use, or cached, until one of the computed property’s
+reactive dependencies change.
+ **/
     var app = new Vue({
         el: "#app",
         data: {
             templateTitle: 'Getting to know Vue.js!',
             methodTitle: 'Getting to know Vue.js!',
-            compute_title: 'Getting to know Vue.js!',
+            ComputeTitle: 'Getting to know Vue.js!',
             publisher: 'Apprex'
         },
         methods:{
@@ -99,14 +104,24 @@
         computed:{
             computedTitle: function(){
                 console.log('Called - comptedTitle');
-                return `${this.compute_title} by ${this.publisher}`
+                return `${this.computeTitle} by ${this.publisher}`
             }
         },
         template: '#tempID'    
         
     });
     
-    //Using a watch to monitor changes
+/**
+ USING A WATCH TO MONITOR CHANGES.
+ The 'searchText' watch monitors the 'searchText' property for changes and calls the 'search' 
+ method when ever the property changes.
+ The 'searchText' property is the model behind an input element. This is a way to decouple the
+ input element changes from an expensive  API call. 
+
+ DEEP WATCH
+ 'Book' is set to watch the object 'book', hence the term 'deep watch', to monitor its properties.  
+ 
+ */
     var app2 = new Vue({
         el: "#app2",
         data:{
@@ -126,7 +141,7 @@
                 axios.get(`https://swapi.co/api/starships/?search=${this.searchText}`)
                 .then(response => {                   
                    this.results = response.data;
-                   this.history[this.searchText] = this.results
+                   this.history[this.searchText] = this.results;
                 });
             }
         },
@@ -148,6 +163,7 @@
         },
         template:'#temp2'
     });
+
 </script>
 </body>
 </html>
