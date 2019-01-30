@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Components Definition</title>
+</head>
+<body>
+    <div id="app">
+        <our-header></our-header>
+        <our-second-header></our-second-header>
+        <our-third-header text="App Header 3" />
+        <our-fourth-header></our-fourth-header>
+    </div>
+    
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"> </script>
+<script>
+/**Basic component defination*/
+Vue.component('our-header', {
+    template: `<h1>App Header</h1>`
+});
+
+/** COmponent having data. The data must be a function that returns an object so eash components get ist own instance of the data*/
+Vue.component('our-second-header', {
+    data: function() {
+        return {
+            text: 'App Header 2: click me'
+        }
+    },
+    template: `<h1 v-on:click="text = text.split('').reverse().join('')">{{text}}</h1>`
+});
+
+/**Component having props. The parent component can pass values to the child using the prop as an attribute*/
+Vue.component('our-third-header', {
+    props: ['text'],
+    template: `<h1>{{text}}</h1>`
+});
+
+
+
+
+new Vue({
+    el:'#app',
+});
+
+</script>
+</body>
+</html>
