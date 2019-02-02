@@ -1,0 +1,55 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Using Modifiers</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+Vue.directive('bookStyle', {
+    inserted: function(el, binding) {
+        if (binding.modifiers.title) {
+           el.style.fontStyle = 'italics';
+        }
+        if (binding.modifiers.author) {
+            el.style.fontWeight = 'bold';
+        }
+
+        if (binding.value && binding.modifiers.color) {
+            el.style.color = binding.value;
+        }
+        if(binding.value && binding.modifiers.fontSize) {
+            console.log(binding.value);
+            el.style.fontSize = `${binding.value}px`;
+        }
+    }
+});
+var app = new Vue({
+    el: '#app',
+    template: ` 
+    <div>
+        <div>
+            <!--Using directives with modifiers-->
+            <p><img src="img/15.jpg" width="150px" /></p>
+            <p v-bookStyle.title>Engineering Physics</p>
+            <p v-book-style.author>Dr Rasak Saiid</p>
+        </div>
+        <div>
+            <!--Using directives with modifiers and directives with modifiers and values-->
+            <p><img src="img/73.jpg" width="150px" /></p>
+            <p v-bookStyle.title v-book-style.color="'blue'">Structural Geology</p>
+            <p v-book-style.author v-bookStyle.fontSize="21">Mariaad Billings</p>
+        </div>
+    </div>`
+});
+/**
+ The modifiers are the variable after the dot following the directive's name
+ e.g v-book-style.color, here the directive is book-style and the modifier is color.
+ or v-bookStyle.title, here the directive is bookStyl and the modifier is title
+*/
+</script>
+</body>
+</html>
