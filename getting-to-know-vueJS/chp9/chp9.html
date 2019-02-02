@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Defining Mixins</title>
+</head>
+<body>
+<div id="app">
+   <component-one />
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+/** This simple mixin contains a data propery for name, 
+    a lifecycle hook to call the 'log' method when created,
+    and a template.
+ */
+var baseMixin = {
+    data: function() {
+        return {  
+            name: 'Tochukwu',
+            email: 'tochukwu@me.xyz',
+        };
+    },  
+    created: function() {
+        this.log(`My name is : ${this.name}`);
+    },
+    methods: {
+        log: function(...params) {
+            console.log(...params)
+        }
+    },
+    template: `
+        <div>
+            <h2>{{name}}</h2>
+            <h3>{{email}}</h3>
+        </div>
+    `
+};
+var subMixin = {
+    data: function() {
+        return {email: 'chuckme@de.xyz' }
+    }
+}
+
+/** Using the baseMixin mixin */
+//The subMixin's email value will override the baseMixin's email value.
+Vue.component('component-one', {
+    mixins: [baseMixin, subMixin]
+});
+new Vue({
+    el: '#app'
+});
+</script>
+</body>
+</html>
