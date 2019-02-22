@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Knowing Vue.JS</title>
+    <title>Events and Events Propagation</title>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 </head>
 <body>
@@ -51,7 +51,7 @@
         <button class="btn btn-primary" v-on:click="para1 = !para1">Toggle</button>
         <p v-show="para1">This paragraph can be toggles off and on!</p>
         <hr />
-        <button v-on:click="toggleMeth" class="btn btn-success">Toggle2</button>
+        <button class="btn btn-success" v-on:click="toggleMeth">Toggle2</button>
         <p v-show="para2">This paragraph can also be toggle but using a method hamdler</p>
         <hr />
         <button class="btn btn-default" v-on:click="togglePara(true)">On</button>
