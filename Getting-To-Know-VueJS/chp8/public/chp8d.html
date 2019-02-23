@@ -1,0 +1,105 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Slots</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Using Slot</h2>
+            <div id="app">
+                <div class="col-sm-12">
+                    <button v-on:click="getBooks($event)" class="btn btn-primary btn-lg">Get Books</button>
+                    <p>&nbsp;</p>
+                </div>
+                <template v-for="book in books" class="col-sm-2">
+                    <book api_url="/img/" v-bind:book="book">
+                        <!-- v-bind:book="book" -->
+                        {{book.length}}
+                        <bookinfo></bookinfo>
+                    </book>
+                </template>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"> </script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+Vue.component('book', {
+    props: {
+        book: {
+            type: Object,
+            required: true,
+            validator: function(value) {
+                return value.hasOwnProperty('title') && value.hasOwnProperty('img');
+            }
+        },
+        api_url: {
+            type: String,
+            required: true,
+            default: 'no-url'
+        }
+    },
+    template: `
+        <div class="col-sm-2">
+            <p><img v-bind:src="api_url + book.img" :title="book.title" class="img-responsive" /></p>
+            <slot :info="book"></slot>
+        </div>
+    `,
+});
+Vue.component('bookinfo', {
+    props: {
+        info: {
+            type: Object,
+            required: false,
+            default: function () {
+                return {
+                    "id": 15,
+                    "title": "Engineering Physics",
+                    "author": "Dr Rakesh Dogra",
+                    "price": 3100,
+                    "img": "15.jpg"
+                }
+            },
+            validator: function(value) {
+                return value.hasOwnProperty('title') &&
+                       value.hasOwnProperty('author') &&
+                       value.hasOwnProperty('price');
+            }
+
+        }
+    },
+    template: `
+        <div>
+            <p>{{info.title}}</p>
+            <p>{{info.author}}</P>
+            <p>{{info.price}}</p>
+        </div>
+    `,
+});
+
+new Vue({
+    el: '#app',
+    data: {
+        books: [],
+    },
+    methods: {
+        getBooks: function(){
+            axios.get('/get-books')
+                 .then((response) => {
+                      this.books = response.data;
+                      //console.log(this.books);
+                 });
+        }
+    }
+});
+
+</script>
+</body>
+</html>
