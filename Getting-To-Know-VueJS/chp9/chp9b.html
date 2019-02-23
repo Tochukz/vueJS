@@ -1,0 +1,89 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Defining Directives</title>
+</head>
+<body>
+<div id="app"></div>
+<div id="app2"></div>
+<div id="app3"></div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    
+/** Defining Basic directives
+     'el' is the element on which the directive is applied
+    'inserted' is a hook which is a function that is called when the element is inserted into the parent node
+ */ 
+Vue.directive('floatRight', {
+    inserted: function(el) {
+        el.style.float = 'right';
+    }
+});
+var app = new Vue({
+    el: '#app',
+    data: {
+        name: 'Tochukwu'
+    },
+    template: `
+         <div>
+            <h1>Floating Directive</h1>
+            <span v-float-right>
+                Float Right
+            </span>
+            <span v-floatRight>
+                &nbsp; Floated Right too
+            </span>
+        </div>`
+});
+
+/**Passing values to the directive and accessing it using the 'binding' argument*/
+Vue.directive('colorFontsize', {
+    inserted: function(el, binding) {
+        el.style.color = 'green';
+        if (binding.value) {
+          el.style.fontSize = `${binding.value}px`;
+        }
+    }
+});
+var app2 = new Vue({
+    el: '#app2', 
+    template: `
+        <div>
+            <h2>Directive with value passed to it</h2>
+            <p v-colorFontsize="18">This line is of size 18px</p>
+            <p v-color-fontsize="21">This line is of size 21px</p>
+        </div>
+    `
+})
+
+/**Passing an Object as value to the directive */
+Vue.directive('specifyStyle', {
+    inserted: function(el, binding) {
+        if (binding.value.fontSize){
+            el.style.fontSize = `${binding.value.fontSize}px`;
+        }
+
+        if (binding.value.color) {
+           el.style.color = binding.value.color;
+        }
+    }
+});
+var app3 = new Vue({
+    el: '#app3',
+    data: {
+        element2: {
+            fontSize: 26,
+            color: 'blue'
+        }
+    },
+    template: `
+        <div> 
+           <h2>Directives with Objects as value</h2>
+           <p v-specifyStyle="{fontSize: 23, color: 'purple'}">This purple line of of size 23</p>
+           <p v-specify-style="element2">The blue line is of size  26</p>             
+        </div>
+        `
+});
+</script>
