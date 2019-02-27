@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register Global Mixin using a Plugin</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+var logLifecycle = {
+    created() {
+        console.log(`Created at ${new Date().toLocaleTimeString()}`);
+    },
+    mounted() {
+        console.log(`Mounted at ${new Date().toLocaleTimeString()}`);
+    },
+    updated() {
+        console.log(`Update at ${new Date().toLocaleTimeString()}`);
+    }
+};
+let customPlugin = {
+    install: function(Vue, options) {
+        //Register the global mixin
+        Vue.mixin(logLifecycle);
+    }
+};
+Vue.use(customPlugin);
+var app = new Vue({
+    el: '#app',
+    template: `
+        <div>
+            <h1>Getting to Know Vue.js</h1>    
+        </div>        
+    `
+})
+</script>
+</body>
+</html>
