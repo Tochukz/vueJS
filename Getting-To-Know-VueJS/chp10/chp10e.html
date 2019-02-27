@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Creating and Using Filter</title>
+</head>
+<body>
+<div id="app"></div>    
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+//Creating a filter that converts text to lower case
+var app = new Vue({
+    el: '#app',
+    data: {
+        title: 'Getting to know Vue.js'
+    },
+    filters: {
+        lowercase: function(value) {
+            if(!value) {
+                return "";
+            }
+            let text = value.toString();
+            return text.toLowerCase();
+        }
+    },
+    template: `
+        <div> 
+            <h1>{{ title | lowercase }}</h1>
+            <input type="text" v-bind:placeholder="title | lowercase" />
+        </div>
+    `
+});
+
+</script>
+</body>
+</html>
