@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chaining filter</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+//Global filter definition
+Vue.filter('uclast', function(value){
+    var str = value.toString();
+    return str.split(' ').map(function(elem){
+        return elem.substr(0, elem.length-1) + elem.substr(elem.length-1).toUpperCase();
+    }).join(' ');
+});
+//Local filter definition
+var app = new Vue({
+    el: '#app',
+    data: {
+        line1 : 'This line will be capitalized',
+        line2: 'This line will have last letters of words in upper case',
+        line3: 'This line will be both capitalized and have last letters of word in upper case'
+    },
+    filters: {
+        ucfirst: function(value) {
+            var str = value.toString();
+            return str.split(' ').map(function(elem){ 
+                return elem.substring(0, 1).toUpperCase() + elem.substr(1).toLowerCase();
+            }).join(' ');
+        }
+    },
+    template: `
+        <div>
+            <p>{{ line1 | ucfirst }}</p>
+            <p>{{ line2 | uclast}} </p>
+            <p>{{ line3 | ucfirst | uclast}} </p>
+        </div>
+    `
+});
+
+</script>
+</body>
+</html>
