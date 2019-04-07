@@ -13,10 +13,11 @@
              <router-link class="nav-link" v-bind:to="{name: 'home'}">Home <span class="sr-only">(current)</span></router-link>
            </li>
            <li class="nav-item">
-             <router-link class="nav-link" v-bind:to="{name: 'blog'}">Blog</router-link>
+             <!-- The attribute :to is short form of v-bind:to -->
+             <router-link class="nav-link" :to="{name: 'blog'}">Blog</router-link>
            </li>
            <li class="nav-item">
-             <router-link class="nav-link" v-bind:to="{name: 'services'}">Services</router-link>
+             <router-link class="nav-link" :to="{name: 'services'}">Services</router-link>
            </li>
            <li class="nav-item">
              <router-link class="nav-link" v-bind:to="{name: 'contact'}">Contact</router-link>
@@ -38,20 +39,8 @@
 </template>
 
 <script>
-// import home from './components/home'
-// import blog from './components/blog'
-// import services from './components/services'
-// import contact from './components/contact'
-//
-// export default {
-//   name: 'app',
-//   components: {
-//     home,
-//     blog,
-//     services,
-//     contact
-//   }
-// }
+export default {
+}
 </script>
 
 <style>
