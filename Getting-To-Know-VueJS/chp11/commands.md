@@ -6,6 +6,6 @@
 * Serve the project using Vue-CLI-Service  
 `$ npm run serve`  
 * Run Build for production    
-`$ npm run build`    
+`$ npm run build`      
 * Lunch Vue GUI  
 `$ vue ui`  
