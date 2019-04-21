@@ -19,7 +19,6 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/get-people', (req, res, next) => {
-    
     //For query parameter: /my-site.com?search=value
     if (req.query.search && req.query.search == 'people') {
         res.json(people);
