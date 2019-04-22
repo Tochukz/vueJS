@@ -1,4 +1,4 @@
-/**State management with Vuex */
+/** State management with Vuex */
 var store = new Vuex.Store({
     state:{
        latestPerson:{
