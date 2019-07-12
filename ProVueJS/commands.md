@@ -17,10 +17,13 @@ npm install --save-dev json-server@0.12.1
 npm install --save-dev jsonwebtoken@8.1.1
 npm install --save-dev faker@4.1.0
 ```
-Subjects Covers:
+Subjects Covered:
 * Data source (json-server for development)
 * Store (Vuex)
 * Axios for http
 
 
-## Chapter 6 : SportsStore: Cheacout and Orders
+## Chapter 6 : SportsStore: Checkout and Orders
+Subjects Covered:
+* URL Routing
+* Form validation using Vulidate
