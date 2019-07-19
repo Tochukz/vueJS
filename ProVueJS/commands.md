@@ -17,13 +17,21 @@ npm install --save-dev json-server@0.12.1
 npm install --save-dev jsonwebtoken@8.1.1
 npm install --save-dev faker@4.1.0
 ```
-Subjects Covered:
-* Data source (json-server for development)
-* Store (Vuex)
-* Axios for http
+Subjects Covered:  
+* Data source (json-server for development)  
+* Store (Vuex)  
+* Axios for http  
 
 
-## Chapter 6 : SportsStore: Checkout and Orders
-Subjects Covered:
-* URL Routing
-* Form validation using Vulidate
+## Chapter 6: SportsStore: Checkout and Orders    
+Subjects Covered:  
+* URL Routing  
+* Form validation using Vulidate  
+Vuelidate supports a wide range of validators. See https://monterail.github.io/vuelidate for details.
+
+## Chpater 7: SportsStore: scaling and Administration  
+The Faker package is described at http://marak.github.io/faker.js  
+Subjected Covered:  
+* Dealing with large data - pagination
+* Authentication
+* Admin features
