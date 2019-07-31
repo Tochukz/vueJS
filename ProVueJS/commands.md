@@ -61,3 +61,18 @@ Deployment process todo:
 * Create a docker container:  
 `$ docker run -p 3000:8081 sportsstore`  
 Here the docker file exposed the container at port 8081 and this is mapped to port 3000 in the external world, therefore the application can be accessed at _localhost:3000_   
+
+## Chapter 9: Undertanding Vue.js
+
+## Chapter 18: Loosely Couple components
+Caution Any component can make changes to a reactive service and not just the component that defines
+it. This can be a useful feature, but it can also cause unexpected behavior.  
+
+A factory function is required when you provide default values for services, which is why the value of
+the default property is assigned a function that returns another function as its result.
+When Vue.js creates the component, it will invoke the default function to get the object that will be used as the service.  
+
+The first step in creating an event bus is to define the service in the Vue object.
+The value for the service is a new Vue object.
+It produces an object that can be used to send and receive custom Vue.js events programmatically without relying on the application’s
+hierarchy of components.
