@@ -1,8 +1,8 @@
 <template>
     <div>
-      <editor-field label="ID" />
-      <editor-field label="Name" />
-      <editor-field label="Price" />
+      <editor-field label="ID" editorFor="id" />
+      <editor-field label="Name" editorFor="name" />
+      <editor-field label="Price" editorFor="price" />
 
       <div class="text-center">
         <button class="btn btn-primary" v-on:click="save">
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import Vue from "vue";
 import EditorField from "./EditorField";
 
 export default {
@@ -26,7 +27,8 @@ export default {
        id: 0,
        name: " ",
        price: 0
-     }
+     },
+     localBus: new Vue()
    }
   },
   components: { 
@@ -60,9 +62,20 @@ export default {
     }
   },
   inject: ["eventBus"],
+  provide: function() {
+    return {
+      editingEventBus: this.localBus
+    }
+  },
   created() {
     this.eventBus.$on("create", this.startCreate);
     this.eventBus.$on("edit", this.startEdit);
+    this.localBus.$on("change", change => this.product[change.name] = change.value);
+  },
+  watch: {
+    product(newValue, oldValue) {
+      this.localBus.$emit("target", newValue);
+    }
   }
   // provide: function() {
   //   return {
