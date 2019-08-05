@@ -76,3 +76,7 @@ The first step in creating an event bus is to define the service in the Vue obje
 The value for the service is a new Vue object.
 It produces an object that can be used to send and receive custom Vue.js events programmatically without relying on the application’s
 hierarchy of components.
+
+## Chapter 19: Using RESTful Wweb services
+
+## Chapter 20: Using data Store

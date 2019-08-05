@@ -1,15 +1,21 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import Axios from "axios";
+
+import PrefsModule from "./preferences";
 
 Vue.use(Vuex);
 
+const baseUrl = "http://localhost:3500/products/";
+
 export default new Vuex.Store({
+  strict: true,
   state: {
-    products: [
-      { id: 1, name: "Product #1", category: "Test", price: 100},
-      { id: 2, name: "Product #2", category: "Test", price: 150},
-      { id: 3, name: "Product #3", category: "Test", price: 200}
-    ]
+    products: [],
+    selectedProduct: null,
+  },
+  modules: {
+    prefs: PrefsModule
   },
   mutations: {
     saveProduct(currentState, product) {
@@ -21,8 +27,43 @@ export default new Vuex.Store({
       }
     },
     deleteProduct(currentState, product) {
-      let index = currentState.products.findOOndex(p => p.id == product.id);
+      let index = currentState.products.findIndex(p => p.id == product.id);
       currentState.products.splice(index, 1);  
+    },
+    selectProduct(currentState, product) {
+      currentState.selectedProduct = product;
+    }
+  },
+  getters: {
+    orderedProducts(state) {
+      return state.products.concat().sort((p1, p2) => p2.price - p1.price);
+    },
+    filteredProducts(state, getters) {
+      return (amount) => getters.orderedProducts.filter(p => p.price > amount);
+    }
+  },
+  actions: {
+    async getProductsAction(context) {
+      (await Axios.get(baseUrl)).data
+        .forEach(p => context.commit("saveProduct", p));
+    },
+    async saveProductAction(context, product) {
+      let index = context.state.products.findIndex(p => p.id == product.id);
+      if (index == -1) {
+        await Axios.post(baseUrl, product);
+      } else {
+        await Axios.put(`${baseUrl}${product.id}`, product);
+      }
+      context.commit("saveProduct", product);
+    },
+    async deleteProductAction(context, product) {
+      await Axios.delete(`${baseUrl}${product.id}`);
+      context.commit("deleteProduct", product);
     }
   }
-})
+});
+
+/**
+ * To receive an argument a getter must return a function, which will be invoked when the getter is read 
+ * and provided with the argument by the component.
+ */

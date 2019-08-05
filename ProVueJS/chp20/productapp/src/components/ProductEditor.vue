@@ -37,11 +37,26 @@ export default {
   },
   methods: {
     save() {
-             
+      //this.$store.commit("saveProduct", this.product);
+      this.$store.dispatch("saveProductAction", this.product);
+      this.product = {};   
     },
     cancel() {
-     
+       this.$store.commit("selectProduct");
     }
   },
+  created() {
+    this.$store.watch(state => state.selectedProduct, 
+      (newValue, oldValue) => {
+        if (newValue == null) {
+          this.editing = false;
+          this.product = {};
+        } else {
+          this.editing = true;
+          this.product = {};
+          Object.assign(this.product, newValue);
+        }
+      });
+  }
 }
 </script>

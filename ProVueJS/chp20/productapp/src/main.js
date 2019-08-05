@@ -5,12 +5,14 @@ Vue.config.productionTip = false
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { RestDataSource } from "./restDataSource";
+import store from "./store";
 
 new Vue({
   render: h => h(App),
   data: {
     eventBus: new Vue()
   },
+  store,
   provide: function() {
     return {
       eventBus: this.eventBus,
