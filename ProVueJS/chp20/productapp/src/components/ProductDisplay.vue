@@ -81,6 +81,7 @@ export default {
 }
 */
 
+// Using map methods instead og this.$store
 import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
 
 export default {
@@ -89,20 +90,27 @@ export default {
     ...mapState({
       useStripedTable: state => state.prefs.stripedTable,
     }),
-    ...mapGetters(["tableClass", "editClass", "deleteClass"])
+    ...mapGetters({
+      tableClass: "prefs/tableClass", 
+      editClass: "prefs/editClass", 
+      deleteClass: "prefs/deleteClass",
+    })
   },
   methods: {
     ...mapMutations({
       editProduct: "selectProduct",
-      createNew: "selectProduct"
+      createNew: "selectProduct",
+      setEditButtonColor: "prefs/setEditButtonColor", 
+      setDeleteButtonColor: "prefs/setDeleteButtonColor",
     }),
-    ...mapMutations(["setEditButtonColor", "setDeleteButtonColor"]),
     ...mapActions({
       getProducts: "getProductsAction",
       deleteProduct: "deleteProductAction",
     })
   },
   created() {
+    console.log('State: ', this.$store.state.prefs.stripedTable); // State: true
+    console.log('Getter: ', this.$store.getters['prefs/editClass']); // Getter: btn-secondary
     this.getProducts();
     this.setEditButtonColor(false);
     this.setDeleteButtonColor(false);
@@ -110,8 +118,11 @@ export default {
 }
 
 /**
- * State data of the module is always kept separate unlike the gtters, mutations and action that are merged.
+ * State data of the module is always kept separate unlike the getters, mutations and action that are merged.
  * To access the state data you use the assinged name of the module like this: state.prefs.stripedTable
- * The assigned name of the module is "prefs" in this case.
+ * The assigned name of the module is "prefs" in this case. 
+ * 
+ * If the namespace option is applied to a module then its getters, mutations and actions will be kept seperate and must be access using the 
+ * a prefix which is the module key.
  */
 </script>

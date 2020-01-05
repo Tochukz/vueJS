@@ -46,6 +46,7 @@ export default {
     }
   },
   created() {
+    // State watcher
     this.$store.watch(state => state.selectedProduct, 
       (newValue, oldValue) => {
         if (newValue == null) {
