@@ -18,8 +18,8 @@ export default new Vuex.Store({
         orders: OrdersModule,
         auth: AuthModule
     },
-    state: {   
-        categoriesData: [],        
+    state: {
+        categoriesData: [],
         currentPage: 1,
         pageSize: 4,
         currentCategory: "All",
@@ -28,9 +28,9 @@ export default new Vuex.Store({
         searchTerm: "",
         showSearch: false
     },
-    getters: {       
-        processedProducts: (state) => {           
-           return state.pages[state.currentPage]     
+    getters: {
+        processedProducts: (state) => {
+           return state.pages[state.currentPage]
         },
         pageCount: (state) => state.serverPageCount,
         categories: state => ["All", ...state.categoriesData],
@@ -39,9 +39,9 @@ export default new Vuex.Store({
          * This is a  second order function.
          * This function return a function which is:
          *   id => state.pages[state.currentPage].find(p => p.id == id)
-         * which is equivalent to 
+         * which is equivalent to
          *   function(id){ return state.pages[state.currentPage].find(p => p.id == id) }
-         * 
+         *
          * To call the getter you can do
          *  productBy(id) instead of productBy
          */
@@ -57,14 +57,14 @@ export default new Vuex.Store({
         _setCurrentCategory(state, category) {
             state.currentCategory = category;
             state.currentPage = 1;
-        },        
+        },
         addPage(state, page) {
             for (let i = 0; i < page.pageCount; i++) {
-                Vue.set(state.pages, page.number + i, 
+                Vue.set(state.pages, page.number + i,
                          page.data.slice(i * state.pageSize,
                              (i * state.pageSize) + state.pageSize));
-                             
-            }            
+
+            }
         },
         clearPages(state) {
             state.pages.splice(0, state.pages.length);
@@ -82,7 +82,7 @@ export default new Vuex.Store({
             state.searchTerm = term;
             state.currentPage = 1;
         },
-        _addProduct(state, product) {            
+        _addProduct(state, product) {
             state.pages[state.currentPage].unshift(product);
         },
         _updateProduct(state, product) {
@@ -109,13 +109,13 @@ export default new Vuex.Store({
             }
 
             let response = await Axios.get(url);
-            
+
             context.commit("setPageCount", response.headers["x-total-count"]);
-            context.commit("addPage", {  
-                number: context.state.currentPage, 
-                data: response.data, 
+            context.commit("addPage", {
+                number: context.state.currentPage,
+                data: response.data,
                 pageCount: getPageCount
-            });            
+            });
         },
         setCurrentPage(context, page) {
             context.commit("_setCurrentPage", page);
@@ -126,7 +126,7 @@ export default new Vuex.Store({
         setPageSize(context, size) {
             context.commit("clearPages");
             context.commit("_setPageSize", size);
-            context.dispatch("getPage", 2);            
+            context.dispatch("getPage", 2);
         },
         setCurrentCategory(context, category) {
             context.commit("clearPages");
@@ -146,7 +146,7 @@ export default new Vuex.Store({
         async addProduct(context, product) {
             let data = (await context.getters.authenticatedAxios.post(productsUrl, product)).data;
             product.id = data.id;
-            this.commit("_addProduct", product);            
+            this.commit("_addProduct", product);
         },
         async removeProduct(context, product) {
             await context.getters.authenticatedAxios.delete(`${productsUrl}/${product.id}`);
@@ -163,7 +163,7 @@ export default new Vuex.Store({
 /**
  * The getters section is for properties whose values are computed using state properties.
  * The mutations section is used to define methods that change the values of one or more state properties.
- * 
+ *
  * Vue.set(array|object, index|property, value)
  * The Vue.set() method is used to modify array or object to ensure that VueJS can tract the changes made.
  */
