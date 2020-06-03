@@ -4,7 +4,7 @@ Some of the code have been extended or modified for easy future reference.
 
 ## Chapter 3: Conditional Rendering
 
-## Chpater 6: Binding
+## Chapter 6: Binding
 * Forms
 * Styling
 * Modifiers
@@ -19,7 +19,7 @@ Some of the code have been extended or modified for easy future reference.
 * Chp8c.html
   * Adding events to components
 * chp8d.html
-  * Usiing slot to add sub-components
+  * Using slot to add sub-components
 * chp8e.html
   * Defining local components
 
@@ -27,6 +27,19 @@ Some of the code have been extended or modified for easy future reference.
 * Single File Components  
 * Vue CLI  
 * Vue UI
+
+__Vue Basic commands__   
+* Install the Vue CLI  
+`$ npm install -g @vue/cli`    
+* Create Vue Projects    
+`$ vue create my-app`   
+* Serve the project using Vue-CLI-Service   
+`$ npm run serve`  
+* Run Build for production    
+`$ npm run build`      
+* Lunch Vue GUI  
+`$ vue ui`  
+
 
 ## Chapter 12: Using Routers
 * DIY Routers
