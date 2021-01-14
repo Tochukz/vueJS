@@ -2,7 +2,7 @@
 #### Install the Vue CLI  
 `$ npm install -g @vue/cli`  
 
-#### Create Vue Proojects  
+#### Create Vue Projects  
 `$ vue create my-app`  
 
 #### Serve the project using Vue-CLI-Service

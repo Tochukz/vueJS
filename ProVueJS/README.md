@@ -84,9 +84,9 @@ The value for the service is a new Vue object.
 It produces an object that can be used to send and receive custom Vue.js events programmatically without relying on the application’s
 hierarchy of components.
 
-## Chapter 19: Using RESTful Web services
+### Chapter 19: Using RESTful Web services
 
-## Chapter 20: Using data Store  
+### Chapter 20: Using data Store  
 Install the vuex package  
 `$ npm install vuex@3.0.1`  
 
@@ -108,4 +108,19 @@ For actions:
 
 Where prefix is the key assigned to the module under the `modules` object of the root `Store` option object.  
 
-## Chapter 25: Transitions  
+### Chapter 25: Transitions  
+Creating the project  
+`$ vue create transition-app --default`  
+Install required packages  
+`$ yarn add bootstrap@4.0.0`  
+`$ yarn add vue-router@3.0.1`
+`$ yarn add animate.css@3.6.1`  
+`$ yarn add popmotion@8.1.24`
+
+__Transition Classes__  
+`v-enter`   
+`v-enter-active`   
+`v-enter-to`  
+`v-leave`  
+`v-leave-active`  
+`v-leave-to`  
