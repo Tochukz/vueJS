@@ -1,0 +1,9 @@
+.card-body {
+    height: 100vh;
+}
+
+.form {
+    position: fixed;
+    bottom: 0;
+    width: 400px;
+}
